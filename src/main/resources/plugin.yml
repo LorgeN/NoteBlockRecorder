@@ -1,0 +1,9 @@
+name: NoteBlockRecorder
+version: ${project.version}
+main: org.tanberg.noteblockrecorder.NoteBlockRecorder
+api-version: 1.16
+authors: [ LorgeN ]
+
+commands:
+  record:
+    description: Start/stop recording note block events
