@@ -7,3 +7,7 @@ authors: [ LorgeN ]
 commands:
   record:
     description: Start/stop recording note block events
+    permission: noteblockrecorder.record
+  play:
+    description: Start/stop playback of a recorded song
+    permission: noteblockrecorder.play
