@@ -1,6 +1,5 @@
 package org.tanberg.noteblockrecorder.record;
 
-import net.minecraft.server.v1_16_R3.MinecraftServer;
 import org.bukkit.Instrument;
 import org.bukkit.Note;
 import org.bukkit.event.EventHandler;
@@ -8,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.NotePlayEvent;
 import org.tanberg.noteblockrecorder.NoteBlockRecorder;
 import org.tanberg.noteblockrecorder.playback.NoteBlockSong;
+import org.tanberg.noteblockrecorder.util.NMSServerUtil;
 
 import java.io.File;
 
@@ -63,15 +63,16 @@ public class NoteBlockRecordingManager implements Listener {
             return;
         }
 
+        int currentTick = NMSServerUtil.getCurrentTick();
         if (this.startTick == -1) {
-            this.startTick = MinecraftServer.currentTick;
+            this.startTick = currentTick;
         }
 
-        int currentTick = MinecraftServer.currentTick - this.startTick;
+        currentTick -= this.startTick;
+
         Note note = event.getNote();
         Instrument instrument = event.getInstrument();
-        System.out.println(
-            "Recording note @ " + currentTick + ": " + instrument.name() + " - " + note);
+        System.out.println("Recording note @ " + currentTick + ": " + instrument.name() + " - " + note);
         this.currentSong.addNote(currentTick, instrument, note);
     }
 }
