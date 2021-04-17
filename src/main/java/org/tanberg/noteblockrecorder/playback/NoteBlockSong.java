@@ -89,7 +89,7 @@ public class NoteBlockSong {
      */
     public int getDuration() {
         return this.getNotes().stream()
-            .min(Comparator.comparing(NoteBlockNote::getTick))
+            .max(Comparator.comparing(NoteBlockNote::getTick))
             .orElseThrow(() -> new IllegalStateException("Empty song!")).getTick();
     }
 
